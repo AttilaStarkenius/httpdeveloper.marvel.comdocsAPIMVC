@@ -1,4 +1,10 @@
-﻿@{
+﻿@model IEnumerable<httpdeveloper.marvel.comdocsAPIMVC.Models.ResultViewModel>
+
+@{
+    ViewData["Title"] = "SomeActionMethod";
+}
+
+@{
     ViewBag.Title = "Marvel API C# Wrapper";
     ViewBag.marvelDeveloper = "developer.marvel.com";
     Layout = null;
@@ -7,7 +13,9 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
+
     <link href="~/Styles/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
@@ -15,7 +23,13 @@
     <link href="~/Styles/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <script src="/Scripts/Index.js"></script>
+
 </head>
+
 <body>
     <div class="header">
         <div class="container">
@@ -136,11 +150,62 @@
             <a id="backButton" class="btn waves-effect waves-light btn-flat">Back!</a>
         </div>
     </div>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/prism.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-    <script src="/Scripts/Index.js"></script>
-
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+<h1>SomeActionMethod</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
