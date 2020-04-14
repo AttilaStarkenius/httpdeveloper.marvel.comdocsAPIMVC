@@ -51,7 +51,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 //{
                     results =
                     response.Data.Results.Select(res =>
-                        new ResultViewModel { Id = res.Id, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                        new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //    }
             //}
             //else
@@ -66,9 +66,33 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 //{
                     results =
                     response.Data.Results.Select(res =>
-                        new ResultViewModel { Id = res.Id, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                        new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //}
-            return Json(results);
+            var firstResultDescription = results.FirstOrDefault();
+
+            //var characterList = 
+
+            //var characterList = firstResultDescription.Description.
+
+            var storyFilter = new httpdeveloper.marvel.comdocsAPIMVC.Filters.StoryRequestFilter {   };
+            filter.OrderBy(OrderResult.NameAscending);
+            filter.Limit = 40;
+
+            var storyFilterresponse = client.FindStoryCharacters("1009351");
+
+            //if (response.Code == "200")
+            //{
+            results =
+            response.Data.Results.Select(res =>
+                new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            //    }
+            //}
+
+            var storyFilterresponseCharacterList = results;
+
+            return Json(storyFilterresponseCharacterList);
+
+            //return Json(results);
         }
             
         
