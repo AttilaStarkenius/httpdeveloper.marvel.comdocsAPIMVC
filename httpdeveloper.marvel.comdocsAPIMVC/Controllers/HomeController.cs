@@ -43,9 +43,11 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //{
                 var filter = new CharacterRequestFilter { NameStartsWith = "hulk" };
                 filter.OrderBy(OrderResult.NameAscending);
-                filter.Limit = 40;
+            //filter.Limit = 40;
+            filter.Limit = 1;
 
-                var response = client.FindCharacters(filter);
+
+            var response = client.FindCharacters(filter);
 
                 //if (response.Code == "200")
                 //{
@@ -56,11 +58,19 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //}
             //else
             //{
-                var comicFilter = new ComicRequestFilter { TitleStartsWith = "hulk" };
+
+            ViewBag.Message = results;
+
+
+
+
+
+            var comicFilter = new ComicRequestFilter { TitleStartsWith = "hulk" };
             comicFilter.OrderBy(OrderResult.NameAscending);
             comicFilter.Limit = 40;
+            //comicFilter.Limit = 1;
 
-                var comicFilterresponse = client.FindComics(comicFilter);
+            var comicFilterresponse = client.FindComics(comicFilter);
 
                 //if (response.Code == "200")
                 //{
@@ -77,6 +87,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             var storyFilter = new httpdeveloper.marvel.comdocsAPIMVC.Filters.StoryRequestFilter {   };
             filter.OrderBy(OrderResult.NameAscending);
             filter.Limit = 40;
+            //filter.Limit = 1;
 
             var storyFilterresponse = client.FindStoryCharacters("1009351");
 
@@ -90,7 +101,11 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             var storyFilterresponseCharacterList = results;
 
-            return Json(storyFilterresponseCharacterList);
+            //return Json(storyFilterresponseCharacterList);
+
+            return View();
+
+            ////return View(storyFilterresponseCharacterList);
 
             //return Json(results);
         }
