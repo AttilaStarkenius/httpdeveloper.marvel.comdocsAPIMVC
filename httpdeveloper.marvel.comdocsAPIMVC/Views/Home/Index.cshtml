@@ -9,7 +9,7 @@
 @{
     var items = (List<ResultViewModel>)ViewBag.Message;
 }
-<table>
+@*<table>
     @foreach (var item in items)
     {
         <tr>
@@ -17,9 +17,9 @@
             <td>@item.Description</td>
         </tr>
     }
-</table>
+</table>*@
 
-@*<html>
+<html>
 <head>
     <link href="~/Styles/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -27,7 +27,24 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700' rel='stylesheet' type='text/css'>
     <link href="~/Styles/main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/prism.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <script src="/Scripts/Index.js"></script>
+</head>
+<body>
+    <table class="page-title center">
+        @foreach (var item in items)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
+    @*<title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="header">
