@@ -93,17 +93,25 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             //if (response.Code == "200")
             //{
-            results =
+            //results =
+            //response.Data.Results.Select(res =>
+            //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            ////    }
+            ////}
+
+            List<CharactersInResultViewModel> charactersResults = null;
+
+            charactersResults =
             response.Data.Results.Select(res =>
-                new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                new CharactersInResultViewModel { Name = res.Name }).ToList();
             //    }
             //}
 
-            var storyFilterresponseCharacterList = results;
+            //var storyFilterresponseCharacterList = charactersResults;
 
             //return Json(storyFilterresponseCharacterList);
 
-            return View();
+            return View("Index", charactersResults);
 
             ////return View(storyFilterresponseCharacterList);
 
