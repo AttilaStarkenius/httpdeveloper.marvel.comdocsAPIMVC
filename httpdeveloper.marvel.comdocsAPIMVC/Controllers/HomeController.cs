@@ -35,13 +35,15 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             const string privateKey = "b7e37b0815b570c2f84f0267060b0637698ed06a";
 
             var client = new MarvelRestClient(apiKey, privateKey);
-            List<ResultViewModel> results = null;
+            //List<ResultViewModel> results = null;
+            List<CharactersInResultViewModel> results = null;
+
 
             //NameViewModel postdata = "hulk";
 
             //if (postdata.Type.ToLower() == "character")
             //{
-                var filter = new CharacterRequestFilter { NameStartsWith = "hulk" };
+            var filter = new CharacterRequestFilter { NameStartsWith = "hulk" };
                 filter.OrderBy(OrderResult.NameAscending);
             //filter.Limit = 40;
             filter.Limit = 1;
@@ -49,12 +51,19 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             var response = client.FindCharacters(filter);
 
-                //if (response.Code == "200")
-                //{
-                    results =
-                    response.Data.Results.Select(res =>
-                        new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            //if (response.Code == "200")
+            //{
+            //results =
+            //response.Data.Results.Select(res =>
+            //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //    }
+
+
+            results =
+            response.Data.Results.Select(res =>
+                new CharactersInResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+
+
             //}
             //else
             //{
@@ -76,7 +85,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 //{
                     results =
                     response.Data.Results.Select(res =>
-                        new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                        new CharactersInResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //}
             var firstResultDescription = results.FirstOrDefault();
 
