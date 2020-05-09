@@ -34,14 +34,32 @@
 </head>
 <body>
     <table class="col s12">
-        @foreach (var item in items)
+        @*@foreach (var item in items.)
         {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-            </tr>
-        }
-    </table>
+            
+
+        }*@
+
+        @items.FirstOrDefault().Name.
+
+            @foreach (var item in items)
+            {
+        <tr>
+
+            <td>@*item.Characters.Items.*@</td>
+
+            <td>@*item.Characters.*@</td>
+
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+
+            <td>@item.Characters</td>
+
+            @*item.Characters.Returned.*@
+
+        </tr>
+            }
+        </table>
 </body>
 </html>
     @*<title>@ViewBag.Title</title>

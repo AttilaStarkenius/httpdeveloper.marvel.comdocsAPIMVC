@@ -37,6 +37,8 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             var client = new MarvelRestClient(apiKey, privateKey);
             //List<ResultViewModel> results = null;
             List<CharactersInResultViewModel> results = null;
+            List<CharactersInResultViewModel> resultsCharactersInAStory = null;
+
 
 
             //NameViewModel postdata = "hulk";
@@ -61,9 +63,9 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             results =
             response.Data.Results.Select(res =>
-                new CharactersInResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                new CharactersInResultViewModel { StoryID = res.Stories.Items.Equals("1009351").ToString(),/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
 
-
+           
             //}
             //else
             //{
@@ -85,7 +87,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 //{
                     results =
                     response.Data.Results.Select(res =>
-                        new CharactersInResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                        new CharactersInResultViewModel { /*Characters = Marvel.Api.Model.DomainObjects.Story.*/ Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //}
             var firstResultDescription = results.FirstOrDefault();
 
@@ -93,12 +95,19 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             //var characterList = firstResultDescription.Description.
 
-            var storyFilter = new httpdeveloper.marvel.comdocsAPIMVC.Filters.StoryRequestFilter {   };
-            filter.OrderBy(OrderResult.NameAscending);
-            filter.Limit = 40;
+            var Filter = new StoryRequestFilter {   };
+            Filter.OrderBy(OrderResult.NameAscending);
+            Filter.Limit = 40;
             //filter.Limit = 1;
 
-            var storyFilterresponse = client.FindStoryCharacters("1009351");
+            StoryResult storyFilterresponse = client.FindStory("1009351");  /*client.FindStoryCharacters("1009351");*/
+
+            //storyFilterresponse.Data.Results.
+
+            //resultsCharactersInAStory =
+            //storyFilterresponse.Data.Results.Select(res =>
+            //    new CharactersInResultViewModel { /*Characters = res.Stories., */Id = res.Id, Description = res.Description/*, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL */}).ToList();
+            ////    }
 
             //if (response.Code == "200")
             //{
@@ -108,7 +117,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             ////    }
             ////}
 
-            List<CharactersInResultViewModel> charactersResults = null;
+            List< CharactersInResultViewModel> charactersResults = null;
 
             charactersResults =
             response.Data.Results.Select(res =>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Marvel.Api.Model.Lists;
+using Marvel.Api.Model.Summaries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +9,10 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Models
 {
     public class CharactersInResultViewModel
     {
-        public List<ResultViewModel> Characters;
+        public string StoryID { get; set; }
+        public CharacterList Characters { get; set; }
+
+        public List<ResultViewModel> CharactersInTheStory;
         public int Id { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }

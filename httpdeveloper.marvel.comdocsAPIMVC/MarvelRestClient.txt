@@ -1,0 +1,58 @@
+﻿#region Assembly Marvel.Api, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null
+// C:\Users\Attila\.nuget\packages\marvel.api\0.1.0\lib\Marvel.Api.dll
+#endregion
+
+using Marvel.Api.Filters;
+using Marvel.Api.Results;
+
+namespace Marvel.Api
+{
+    public class MarvelRestClient : MarvelClient
+    {
+        public MarvelRestClient(string apiPublicKey, string apiPrivateKey);
+
+        public virtual CharacterResult FindCharacter(string characterId);
+        public virtual ComicResult FindCharacterComics(string characterId, ComicRequestFilter filter = null);
+        public virtual EventResult FindCharacterEvents(string characterId, EventRequestFilter filter = null);
+        public virtual CharacterResult FindCharacters(CharacterRequestFilter filter = null);
+        public virtual SeriesResult FindCharacterSeries(string characterId, SeriesRequestFilter filter = null);
+        public virtual StoryResult FindCharacterStories(string characterId, StoryRequestFilter filter = null);
+        public virtual ComicResult FindComic(string comicId);
+        public virtual CharacterResult FindComicCharacters(string comicId, CharacterRequestFilter filter = null);
+        public virtual CreatorResult FindComicCreators(string comicId, CreatorRequestFilter filter = null);
+        public virtual EventResult FindComicEvents(string comicId, EventRequestFilter filter = null);
+        public virtual ComicResult FindComics(ComicRequestFilter filter = null);
+        public virtual StoryResult FindComicStories(string comicId, StoryRequestFilter filter = null);
+        public virtual CreatorResult FindCreator(string creatorId);
+        public virtual ComicResult FindCreatorComics(string creatorId, ComicRequestFilter filter = null);
+        public virtual EventResult FindCreatorEvents(string creatorId, EventRequestFilter filter = null);
+        public virtual CreatorResult FindCreators(CreatorRequestFilter filter = null);
+        public virtual SeriesResult FindCreatorSeries(string creatorId, SeriesRequestFilter filter = null);
+        public virtual StoryResult FindCreatorStories(string creatorId, StoryRequestFilter filter = null);
+        public virtual EventResult FindEvent(string eventId);
+        public virtual CharacterResult FindEventCharacters(string eventId, CharacterRequestFilter filter = null);
+        public virtual ComicResult FindEventComics(string eventId, ComicRequestFilter filter = null);
+        public virtual CreatorResult FindEventCreators(string eventId, CreatorRequestFilter filter = null);
+        public virtual EventResult FindEvents(EventRequestFilter filter = null);
+        public virtual SeriesResult FindEventSeries(string eventId, SeriesRequestFilter filter = null);
+        public virtual StoryResult FindEventStories(string eventId, StoryRequestFilter filter = null);
+        public virtual SeriesResult FindSeries(SeriesRequestFilter filter = null);
+        public virtual SeriesResult FindSeries(string seriesId);
+        public virtual CharacterResult FindSeriesCharacters(string seriesId, CharacterRequestFilter filter = null);
+        public virtual ComicResult FindSeriesComics(string seriesId, ComicRequestFilter filter = null);
+        public virtual CreatorResult FindSeriesCreators(string seriesId, CreatorRequestFilter filter = null);
+        public virtual EventResult FindSeriesEvents(string seriesId, EventRequestFilter filter = null);
+
+
+
+
+        public virtual StoryResult FindSeriesStories(string seriesId, StoryRequestFilter filter = null);
+        public virtual StoryResult FindStories(StoryRequestFilter filter = null);
+        public virtual StoryResult FindStory(string storyId);
+        public virtual CharacterResult FindStoryCharacters(string storyId, CharacterRequestFilter filter = null);
+        public virtual ComicResult FindStoryComics(string storyId, ComicRequestFilter filter = null);
+        public virtual CreatorResult FindStoryCreators(string storyId, CreatorRequestFilter filter = null);
+        public virtual EventResult FindStoryEvents(string storyId, EventRequestFilter filter = null);
+        public virtual SeriesResult FindStorySeries(string storyId, SeriesRequestFilter filter = null);
+    }
+}
