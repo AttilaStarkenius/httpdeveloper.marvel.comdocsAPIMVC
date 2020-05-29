@@ -1,0 +1,115 @@
+﻿Stories.cs
+    1 using Marvel.Api.Filters;
+    2 using Marvel.Api.Results;
+    3 using RestSharp;
+    4 
+    5 namespace Marvel.Api
+    6 {
+    7     public partial class MarvelRestClient
+    8     {
+    9         private const string StoriesUrlSegment = "/public/stories";
+   10 
+   17         public virtual StoryResult FindStories(StoryRequestFilter filter = default(StoryRequestFilter))
+   18         {
+   19             var request = new RestRequest(StoriesUrlSegment, Method.GET);
+   20 
+   21             // Parse filter
+   22             //
+   23             ParseStoryFilter(request, filter);
+   24 
+   25             return Execute<StoryResult>(request);
+   26         }
+   27 
+   35         public virtual StoryResult FindStory(string storyId)
+   36         {
+   37             // Build request url
+   38             //
+   39             string requestUrl =
+   40                 string.Format("{0}/{1}", StoriesUrlSegment, storyId);
+   41 
+   42             var request = new RestRequest(requestUrl, Method.GET);
+   43 
+   44             return Execute<StoryResult>(request);
+   45         }
+   46 
+   57         public virtual CharacterResult FindStoryCharacters(string storyId, CharacterRequestFilter filter = default(CharacterRequestFilter))
+   58         {
+   59             // Build request url
+   60             //
+   61             string requestUrl =
+   62                 string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+   63 
+   64             var request = new RestRequest(requestUrl, Method.GET);
+   65 
+   66             // Parse filter
+   67             //
+   68             ParseCharacterFilter(request, filter);
+   69 
+   70             return Execute<CharacterResult>(request);
+   71         }
+   72 
+   83         public virtual ComicResult FindStoryComics(string storyId, ComicRequestFilter filter = default(ComicRequestFilter))
+   84         {
+   85             // Build request url
+   86             //
+   87             string requestUrl =
+   88                 string.Format("{0}/{1}/comics", StoriesUrlSegment, storyId);
+   89 
+   90             var request = new RestRequest(requestUrl, Method.GET);
+   91 
+   92             // Parse filter
+   93             //
+   94             ParseComicFilter(request, filter);
+   95 
+   96             return Execute<ComicResult>(request);
+   97         }
+   98 
+  109         public virtual CreatorResult FindStoryCreators(string storyId, CreatorRequestFilter filter = default(CreatorRequestFilter))
+  110         {
+  111             // Build request url
+  112             //
+  113             string requestUrl =
+  114                 string.Format("{0}/{1}/creators", StoriesUrlSegment, storyId);
+  115 
+  116             var request = new RestRequest(requestUrl, Method.GET);
+  117 
+  118             // Parse filter
+  119             //
+  120             ParseCreatorFilter(request, filter);
+  121 
+  122             return Execute<CreatorResult>(request);
+  123         }
+  124 
+  135         public virtual EventResult FindStoryEvents(string storyId, EventRequestFilter filter = default(EventRequestFilter))
+  136         {
+  137             // Build request url
+  138             //
+  139             string requestUrl =
+  140                 string.Format("{0}/{1}/events", StoriesUrlSegment, storyId);
+  141 
+  142             var request = new RestRequest(requestUrl, Method.GET);
+  143 
+  144             // Parse filter
+  145             //
+  146             ParseEventFilter(request, filter);
+  147 
+  148             return Execute<EventResult>(request);
+  149         }
+  150 
+  160         public virtual SeriesResult FindStorySeries(string storyId, SeriesRequestFilter filter = default(SeriesRequestFilter))
+  161         {
+  162             // Build request url
+  163             //
+  164             string requestUrl =
+  165                 string.Format("{0}/{1}/series", StoriesUrlSegment, storyId);
+  166 
+  167             var request = new RestRequest(requestUrl, Method.GET);
+  168 
+  169             // Parse filter
+  170             //
+  171             ParseSeriesFilter(request, filter);
+  172 
+  173             return Execute<SeriesResult>(request);
+  174         }
+  175     }
+  176 }

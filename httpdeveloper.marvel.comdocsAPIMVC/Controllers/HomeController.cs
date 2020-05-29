@@ -16,11 +16,16 @@ using Marvel.Api.Model.DomainObjects;
 using Marvel.Api.Results;
 using Marvel.Api.Model;
 using DocumentFormat.OpenXml.ExtendedProperties;
+using RestSharp;
 
 namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 {
     public class HomeController : Controller
     {
+
+        private const string StoriesUrlSegment = "/public/stories";
+
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -46,12 +51,12 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //if (postdata.Type.ToLower() == "character")
             //{
             var filter = new CharacterRequestFilter { NameStartsWith = "hulk" };
-                filter.OrderBy(OrderResult.NameAscending);
+            filter.OrderBy(OrderResult.NameAscending);
             //filter.Limit = 40;
             filter.Limit = 1;
 
 
-            var response = client.FindCharacters(filter);
+            var response = client.FindCharacters(filter); 
 
             //if (response.Code == "200")
             //{
@@ -59,18 +64,32 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //response.Data.Results.Select(res =>
             //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //    }
-
-
-            results =
-            response.Data.Results.Select(res =>
-                new CharactersInResultViewModel { StoryID = res.Stories.Items.Equals("1009351").ToString(),/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
-
+            public virtual RestRequest/*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
+        {
+            // Build request url
+                        //
+                string requestUrl =
+                    string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+            
+                var request = new RestRequest(requestUrl, Method.GET);
+            
+                // Parse filter
+                //
+               //ParseCharacterFilter(request, filter);
            
-            //}
-            //else
-            //{
+                return /*Execute*//*<CharacterResult>*/(request);
+        }
 
-            ViewBag.Message = results;
+        //results =
+        //response.Data.Results.Select(res =>
+        //    new CharactersInResultViewModel { StoryID = /*res.Stories.Items.Equals(*/"1009351"/*).ToString()*/,/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+
+
+        //}
+        //else
+        //{
+
+        ViewBag.Message = results;
 
 
 
@@ -129,12 +148,13 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             //return Json(storyFilterresponseCharacterList);
 
-            return View("Index", charactersResults);
+            return View("Index", results);
 
             ////return View(storyFilterresponseCharacterList);
 
             //return Json(results);
         }
+
             
         
 
@@ -269,4 +289,5 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+}
 }
