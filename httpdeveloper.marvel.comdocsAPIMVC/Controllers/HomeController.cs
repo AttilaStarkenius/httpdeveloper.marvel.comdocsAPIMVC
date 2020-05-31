@@ -33,7 +33,23 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(/*NameViewModel postdata*/)
+        public virtual RestRequest/*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
+        {
+            // Build request url
+            //
+            string requestUrl =
+                string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+
+            var request = new RestRequest(requestUrl, Method.GET);
+
+            // Parse filter
+            //
+            //ParseCharacterFilter(request, filter);
+
+            return /*Execute*//*<CharacterResult>*/(request);
+        }
+
+        public IActionResult Index(RestRequest request/*NameViewModel postdata*/)
         {
 
             const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
@@ -64,21 +80,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //response.Data.Results.Select(res =>
             //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
             //    }
-            public virtual RestRequest/*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
-        {
-            // Build request url
-                        //
-                string requestUrl =
-                    string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
-            
-                var request = new RestRequest(requestUrl, Method.GET);
-            
-                // Parse filter
-                //
-               //ParseCharacterFilter(request, filter);
-           
-                return /*Execute*//*<CharacterResult>*/(request);
-        }
+
 
         //results =
         //response.Data.Results.Select(res =>
@@ -148,12 +150,13 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             //return Json(storyFilterresponseCharacterList);
 
-            return View("Index", results);
+            return View("Index", request);
 
             ////return View(storyFilterresponseCharacterList);
 
             //return Json(results);
         }
+
 
             
         
@@ -289,5 +292,4 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-}
 }
