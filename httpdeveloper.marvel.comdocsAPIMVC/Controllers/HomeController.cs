@@ -72,7 +72,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             filter.Limit = 1;
 
 
-            var response = client.FindCharacters(filter); 
+            var response = client.FindCharacters(filter);
 
             //if (response.Code == "200")
             //{
@@ -82,14 +82,17 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //    }
 
 
-        //results =
-        //response.Data.Results.Select(res =>
-        //    new CharactersInResultViewModel { StoryID = /*res.Stories.Items.Equals(*/"1009351"/*).ToString()*/,/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            //results =
+            //response.Data.Results.Select(res =>
+            //    new CharactersInResultViewModel { StoryID = /*res.Stories.Items.Equals(*/"1009351"/*).ToString()*/,/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
 
 
-        //}
-        //else
-        //{
+            //}
+            //else
+            //{
+
+            ViewBag.Message = request;
+
 
         ViewBag.Message = results;
 
