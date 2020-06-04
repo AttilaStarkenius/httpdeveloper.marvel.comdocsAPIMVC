@@ -1,5 +1,6 @@
 ﻿using Marvel.Api.Model.Lists;
 using Marvel.Api.Model.Summaries;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Models
 {
     public class CharactersInResultViewModel
     {
+        RestRequest request { get; set; }
         public string StoryID { get; set; }
         public CharacterList Characters { get; set; }
 
