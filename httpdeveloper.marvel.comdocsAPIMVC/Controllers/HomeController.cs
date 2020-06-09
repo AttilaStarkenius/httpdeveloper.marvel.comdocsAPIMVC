@@ -40,13 +40,13 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             string requestUrl =
                 string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
 
-            CharactersInResultViewModel request = new RestRequest(requestUrl, Method.GET);
+            RestRequest request = new RestRequest(requestUrl, Method.GET);
 
             // Parse filter
             //
             //ParseCharacterFilter(request, filter);
 
-            return /*Execute*//*<CharacterResult>*//*(*/request/*)*/;
+            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/request/*)*/;
         }
 
         public IActionResult Index(RestRequest request/*NameViewModel postdata*/)
