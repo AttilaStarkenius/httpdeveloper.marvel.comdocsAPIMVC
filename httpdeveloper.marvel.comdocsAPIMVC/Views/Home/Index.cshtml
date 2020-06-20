@@ -6,8 +6,10 @@
 
 <!DOCTYPE html>
 
+@using RestSharp;
+
 @{
-    var items = (List<CharactersInResultViewModel>)ViewBag.Message;
+    List<RestRequest> requestList = /*(List<CharactersInResultViewModel>)*/ViewBag.Message;
 }
 @*<table>
     @foreach (var item in items)
@@ -40,9 +42,9 @@
 
         }*@
 
-        @items.FirstOrDefault().Name.
+        @requestList.FirstOrDefault()@*.Name.*@
 
-            @foreach (var item in items)
+            @foreach (var item in requestList)
             {
         <tr>
 
