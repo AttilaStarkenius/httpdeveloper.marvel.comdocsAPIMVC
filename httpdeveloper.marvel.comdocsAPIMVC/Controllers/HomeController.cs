@@ -46,6 +46,8 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //
             //ParseCharacterFilter(request, filter);
 
+            RestResponse response = new RestResponse();
+
             return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/request/*)*/;
         }
 
