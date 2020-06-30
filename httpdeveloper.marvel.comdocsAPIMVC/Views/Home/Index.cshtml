@@ -9,7 +9,10 @@
 @using RestSharp;
 
 @{
-    List<RestRequest> requestList = /*(List<CharactersInResultViewModel>)*/ViewBag.Message;
+    /*List<RestRequest> requestList =*/ /*(List<CharactersInResultViewModel>)*//*ViewBag.Message;*/
+
+    List<RestResponse> requestList = ViewBag.Message;
+
 }
 @*<table>
     @foreach (var item in items)

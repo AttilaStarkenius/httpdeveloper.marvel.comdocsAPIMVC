@@ -46,6 +46,10 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //
             //ParseCharacterFilter(request, filter);
 
+            RestClient restClient = new RestClient("http://gateway.marvel.com/");
+
+            restClient.Execute(request);
+
             RestResponse response = new RestResponse();
 
             return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/request/*)*/;
