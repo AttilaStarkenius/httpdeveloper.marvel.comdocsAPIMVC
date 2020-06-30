@@ -33,7 +33,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             _logger = logger;
         }
 
-        public virtual RestRequest/*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
+        public virtual RestResponse/*RestRequest*//*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
         {
             // Build request url
             //
@@ -48,11 +48,14 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestClient restClient = new RestClient("http://gateway.marvel.com/");
 
-            restClient.Execute(request);
+            //restClient.Execute(request);
 
-            RestResponse response = new RestResponse();
+            RestResponse response = (RestResponse)restClient.Execute(request);
 
-            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/request/*)*/;
+            //_ = response.Content;
+
+
+            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/response/*)*/;
         }
 
         public IActionResult Index(RestRequest request/*NameViewModel postdata*/)
