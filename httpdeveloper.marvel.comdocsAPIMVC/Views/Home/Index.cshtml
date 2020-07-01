@@ -11,7 +11,9 @@
 @{
     /*List<RestRequest> requestList =*/ /*(List<CharactersInResultViewModel>)*//*ViewBag.Message;*/
 
-    List<RestResponse> requestList = ViewBag.Message;
+    /*List<RestResponse> responseList =*/ /*(List<RestResponse>)*//*ViewBag.Message;*/
+
+    RestResponse restResponse = /*(List<RestResponse>)*/ViewBag.Message;
 
 }
 @*<table>
@@ -45,16 +47,16 @@
 
         }*@
 
-        @requestList.FirstOrDefault()@*.Name.*@
+        @restResponse@*.FirstOrDefault()*@@*.Name.*@
 
-            @foreach (var item in requestList)
-            {
+            @*@foreach (var item in responseList)
+            {*@
         <tr>
 
-            <td>@item.Content</td>
-            <td>@item.ContentType</td>
+            <td>@restResponse.Content</td>
+            <td>@restResponse.ContentType</td>
 
-            <td>@item.Headers</td>
+            <td>@restResponse.Headers</td>
 
 
 
@@ -74,7 +76,7 @@
             @*item.Characters.Returned.*@
 
         </tr>
-            }
+            @*}*@
         </table>
 </body>
 </html>

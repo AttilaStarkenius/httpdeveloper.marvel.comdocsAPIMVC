@@ -58,7 +58,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/response/*)*/;
         }
 
-        public IActionResult Index(RestRequest request/*NameViewModel postdata*/)
+        public IActionResult Index(RestResponse restResponse/*RestRequest request*//*NameViewModel postdata*/)
         {
 
             const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
@@ -102,10 +102,14 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             FindStoryCharacters();
 
-            ViewBag.Message = /*(List<CharactersInResultViewModel>)*/request;
+            //ViewBag.Message = (List<CharactersInResultViewModel>)request;
+
+            /*ViewBag.Message =*/ /*(List<CharactersInResultViewModel>)*//*request;*/
+
+            ViewBag.Message = /*(List<CharactersInResultViewModel>)*/restResponse;
 
 
-        //ViewBag.Message = results;
+            //ViewBag.Message = results;
 
 
 
@@ -164,7 +168,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             //return Json(storyFilterresponseCharacterList);
 
-            return View("Index", request);
+            return View("Index", restResponse);
 
             ////return View(storyFilterresponseCharacterList);
 
