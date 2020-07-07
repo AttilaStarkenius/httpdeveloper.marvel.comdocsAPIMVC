@@ -42,6 +42,8 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestRequest request = new RestRequest(requestUrl, Method.GET);
 
+            request.RequestFormat = DataFormat.Json;
+
             // Parse filter
             //
             //ParseCharacterFilter(request, filter);
@@ -51,6 +53,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //restClient.Execute(request);
 
             RestResponse response = (RestResponse)restClient.Execute(request);
+
 
             //_ = response.Content;
 
