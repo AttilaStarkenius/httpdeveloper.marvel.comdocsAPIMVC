@@ -61,7 +61,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/response/*)*/;
         }
 
-        public IActionResult Index(RestResponse restResponse/*RestRequest request*//*NameViewModel postdata*/)
+        public IActionResult Index(/*RestResponse restResponse*//*RestRequest request*//*NameViewModel postdata*/)
         {
 
             const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
@@ -109,7 +109,7 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             /*ViewBag.Message =*/ /*(List<CharactersInResultViewModel>)*//*request;*/
 
-            ViewBag.Message = /*(List<CharactersInResultViewModel>)*/restResponse;
+           /* ViewBag.Message =*/ /*(List<CharactersInResultViewModel>)*//*restResponse;*/
 
 
             //ViewBag.Message = results;
@@ -167,20 +167,22 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             //    }
             //}
 
-            //var storyFilterresponseCharacterList = charactersResults;
+            var storyFilterresponseCharacterList = charactersResults;
+
+            ViewBag.Message = storyFilterresponseCharacterList;
 
             //return Json(storyFilterresponseCharacterList);
 
-            return View("Index", restResponse);
+            //return View("Index", restResponse);
 
-            ////return View(storyFilterresponseCharacterList);
+            return View(storyFilterresponseCharacterList);
 
             //return Json(results);
         }
 
 
-            
-        
+
+
 
 
 
@@ -254,10 +256,10 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
         //    //return View(results);
         //}
 
-            //return View();
-        
+        //return View();
 
-    
+
+
 
         //[HttpPost]
         //public JsonResult SomeActionMethod(NameViewModel postdata)

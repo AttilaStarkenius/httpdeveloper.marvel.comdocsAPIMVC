@@ -13,7 +13,11 @@
 
     /*List<RestResponse> responseList =*/ /*(List<RestResponse>)*//*ViewBag.Message;*/
 
-    RestResponse restResponse = /*(List<RestResponse>)*/ViewBag.Message;
+    /*RestResponse restResponse =*/ /*(List<RestResponse>)*/
+
+    var items = new List<CharactersInResultViewModel>();
+
+    items = ViewBag.Message;
 
 }
 @*<table>
@@ -53,7 +57,7 @@
             {*@
         <tr>
 
-            <td>@restResponse.Content</td>
+            @*<td>@restResponse.Content</td>
             <td>@restResponse.ContentType</td>
 
             <td>@restResponse.RawBytes</td>
@@ -66,7 +70,7 @@
 
             <td>@restResponse.ResponseStatus</td>
 
-            <td>@restResponse.Content.FirstOrDefault()</td>
+            <td>@restResponse.Content.FirstOrDefault()</td>*@
 
 
 
