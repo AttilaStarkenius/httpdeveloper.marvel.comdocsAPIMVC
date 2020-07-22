@@ -10,6 +10,10 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Models
 {
     public class CharactersInResultViewModel
     {
+
+        public StoryList storyList { get; set; }
+
+
         public RestRequest request { get; set; }
         public List<RestRequest> requestList { get; set; }
         public string StoryID { get; set; }
