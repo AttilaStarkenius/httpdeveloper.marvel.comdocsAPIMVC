@@ -18,11 +18,19 @@ using Marvel.Api.Model;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using RestSharp;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Net.Http;
 
 namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 {
     public class HomeController : Controller
     {
+
+
+
+
+
+
 
         private const string StoriesUrlSegment = "/public/stories";
 
@@ -224,45 +232,67 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             var storyFilterresponseCharacterList = charactersResults;
 
-            ViewBag.Message = realresults;
+            var baseAddress = new Uri("http://importmarvel.com/");
+
+            using (var httpClient = new HttpClient
+            {
+                BaseAddress = baseAddress
+            })
+            {
+
+                using (var allCharactersInAStory = /*await */httpClient.GetAsync("api/characters"))
+                {
+
+                    string allCharactersInAStoryData = allCharactersInAStory.Result.ToString();
+
+                    ViewBag.Message = allCharactersInAStoryData;
+
+                    return View(allCharactersInAStoryData);
+
+                }
+
+                //ViewBag.Message = allCharactersInAStoryData;
+
+                //ViewBag.Message = realresults;
+
+                //return View(allCharactersInAStoryData);
+
+                //return View(realresults); 
 
 
-            return View(realresults); 
 
 
 
+                //ViewBag.Message = results;
 
 
-            //ViewBag.Message = results;
-
-
-            //return View(results); 
+                //return View(results); 
 
 
 
-            //ViewBag.Message = resultsCharactersInAStory;
+                //ViewBag.Message = resultsCharactersInAStory;
 
 
-            //return View(resultsCharactersInAStory);
+                //return View(resultsCharactersInAStory);
 
 
 
 
 
 
-            //return View(storyFilterresponse);
+                //return View(storyFilterresponse);
 
 
-            //ViewBag.Message = storyFilterresponseCharacterList;
+                //ViewBag.Message = storyFilterresponseCharacterList;
 
-            //return Json(storyFilterresponseCharacterList);
+                //return Json(storyFilterresponseCharacterList);
 
-            //return View("Index", restResponse);
+                //return View("Index", restResponse);
 
-            //return View(storyFilterresponseCharacterList);
+                //return View(storyFilterresponseCharacterList);
 
-            //return Json(results);
-        }
+                //return Json(results);
+            }
 
 
 
