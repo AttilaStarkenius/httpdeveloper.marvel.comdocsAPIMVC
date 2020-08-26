@@ -20,6 +20,7 @@ using RestSharp;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 {
@@ -59,9 +60,23 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestClient restClient = new RestClient("http://gateway.marvel.com/");
 
+            HttpClient httpClient = new HttpClient("http://gateway.marvel.com/");
+
+
             //restClient.Execute(request);
 
+            //restClient.DefaultParameters
+
+            httpClient.DefaultRequestHeaders
+.Accept
+.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+
+            request.AddHeader("Content-Type", "application/json;charset=UTF-8");
+
+
             RestResponse response = (RestResponse)restClient.Execute(request);
+
+            response.Headers.Add("Content-Type", "application/json;charset=UTF-8");
 
 
             //_ = response.Content;
@@ -139,27 +154,27 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
 
 
-        //else
-        //{
+            //else
+            //{
 
-        //if (response.Code == "200")
-        //{
-        //results =
-        //response.Data.Results.Select(res =>
-        //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
-        //    }
-
-
-        //results =
-        //response.Data.Results.Select(res =>
-        //    new CharactersInResultViewModel { StoryID = /*res.Stories.Items.Equals(*/"1009351"/*).ToString()*/,/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            //if (response.Code == "200")
+            //{
+            //results =
+            //response.Data.Results.Select(res =>
+            //    new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+            //    }
 
 
-        //}
-        //else
-        //{
+            //results =
+            //response.Data.Results.Select(res =>
+            //    new CharactersInResultViewModel { StoryID = /*res.Stories.Items.Equals(*/"1009351"/*).ToString()*/,/**StoryID = res.Stories. */Id = res.Id, Description = res.Description, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
 
-        FindStoryCharacters();
+
+            //}
+            //else
+            //{
+
+            FindStoryCharacters();
 
             //ViewBag.Message = (List<CharactersInResultViewModel>)request;
 
@@ -292,143 +307,146 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 //return View(storyFilterresponseCharacterList);
 
                 //return Json(results);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //[HttpPost]
+                //[HttpGet]
+                //public IActionResult Index(/*NameViewModel postdata*/)
+                //{
+
+                //    const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
+                //    const string privateKey = "b7e37b0815b570c2f84f0267060b0637698ed06a";
+
+                //    const string characterName = "hulk";
+
+                //    var client = new MarvelRestClient(apiKey, privateKey);
+                //    List<ResultViewModel> results = null;
+
+                //    //if (postdata.Type.ToLower() == "character")
+                //    //{
+                //    var filter = new StoryRequestFilter { /*Characters.Equals == The Hulk*//*NameStartsWith = postdata.Name*/ };
+                //    filter.OrderBy(OrderResult.NameAscending);
+                //    //filter.Comics.Contains("hulk");
+                //    //filter.Comics.Where(res.Id == 30)
+                //    //filter.Series.
+                //    filter.Limit = 1;
+
+                //    //var response = client.FindCharacters(filter);
+
+                //    var response = client.FindStories(filter);
+
+                //    //if (response.Code == "200")
+                //    //    {
+                //    //results =
+                //    //response.Data.Results./*Where(results.*//*Where(response.Data.Results.).*/Select(res =>
+                //    //                //new ResultViewModel { Id = 30/*res.Id*/, Description = res.Description,  Name = "The second volume containing the Hulk\u0027s early adventures with appearances by the Sub-Mariner, the Mandarin, Ka-Zar and Nick Fury" /*res.Title*/, Url = "http://gateway.marvel.com/v1/public/stories/30" /*res.ResourceURI*/ })./*Where(response.Data.Results.Id*//*.Where(res.Id == 30)*//*.*/ToList()/*.Where(Id == 30)*//*.FirstOrDefault*//*(*//*t => t.Type == "detail").URL }).ToList(*//*)*/;
+                //    //                new ResultViewModel { Id = 30, Description = res.Description, Name = res.Title, Url = "http://gateway.marvel.com/v1/public/stories/30/" })./*Where(response.Data.Results.Id*//*.Where(res.Id == 30)*//*.*/ToList()/*.Where(Id == 30)*//*.FirstOrDefault*//*(*//*t => t.Type == "detail").URL }).ToList(*//*)*/;
+
+                //    results =
+                //            response.Data.Results.Select(res =>
+                //                new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Title, Url = res.ResourceURI.FirstOrDefault().ToString() }).ToList();
+
+
+
+
+                //    //}.
+
+                //    //results.Where()
+
+                //    //else
+                //    //{
+                //    //    var filter = new ComicRequestFilter { TitleStartsWith = postdata.Name };
+                //    //    filter.OrderBy(OrderResult.NameAscending);
+                //    //    filter.Limit = 40;
+
+                //    //    var response = client.FindComics(filter);
+
+                //    //    if (response.Code == "200")
+                //    //    {
+                //    //        results =
+                //    //        response.Data.Results.Select(res =>
+                //    //            new ResultViewModel { Id = res.Id, Name = res.Title, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                //    //    }
+                //    //}
+                //    return Json(results/*.ToList()*/);
+                //    //return View(results);
+                //}
+
+                //return View();
+
+
+
+
+                //[HttpPost]
+                //public JsonResult SomeActionMethod(NameViewModel postdata)
+                //{
+                //    const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
+                //    const string privateKey = "b7e37b0815b570c2f84f0267060b0637698ed06a";
+
+
+                //    var client = new MarvelRestClient(apiKey, privateKey);
+                //    List<ResultViewModel> results = null;
+
+                //    if (postdata.Type.ToLower() == "character")
+                //    {
+                //        var filter = new CharacterRequestFilter { NameStartsWith = postdata.Name };
+                //        filter.OrderBy(OrderResult.NameAscending);
+                //        filter.Limit = 40;
+
+                //        var response = client.FindCharacters(filter);
+
+                //        if (response.Code == "200")
+                //        {
+                //            results =
+                //            response.Data.Results.Select(res =>
+                //                new ResultViewModel { Id = res.Id, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                //        }
+                //    }
+                //    else
+                //    {
+                //        var filter = new ComicRequestFilter { TitleStartsWith = postdata.Name };
+                //        filter.OrderBy(OrderResult.NameAscending);
+                //        filter.Limit = 40;
+
+                //        var response = client.FindComics(filter);
+
+                //        if (response.Code == "200")
+                //        {
+                //            results =
+                //            response.Data.Results.Select(res =>
+                //                new ResultViewModel { Id = res.Id, Name = res.Title, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
+                //        }
+                //    }
+                //    return Json(results);
+                //}
+
+                //public IActionResult Privacy()
+                //{
+                //    return View();
+                //}
+
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpPost]
-        //[HttpGet]
-        //public IActionResult Index(/*NameViewModel postdata*/)
-        //{
-
-        //    const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
-        //    const string privateKey = "b7e37b0815b570c2f84f0267060b0637698ed06a";
-
-        //    const string characterName = "hulk";
-
-        //    var client = new MarvelRestClient(apiKey, privateKey);
-        //    List<ResultViewModel> results = null;
-
-        //    //if (postdata.Type.ToLower() == "character")
-        //    //{
-        //    var filter = new StoryRequestFilter { /*Characters.Equals == The Hulk*//*NameStartsWith = postdata.Name*/ };
-        //    filter.OrderBy(OrderResult.NameAscending);
-        //    //filter.Comics.Contains("hulk");
-        //    //filter.Comics.Where(res.Id == 30)
-        //    //filter.Series.
-        //    filter.Limit = 1;
-
-        //    //var response = client.FindCharacters(filter);
-
-        //    var response = client.FindStories(filter);
-
-        //    //if (response.Code == "200")
-        //    //    {
-        //    //results =
-        //    //response.Data.Results./*Where(results.*//*Where(response.Data.Results.).*/Select(res =>
-        //    //                //new ResultViewModel { Id = 30/*res.Id*/, Description = res.Description,  Name = "The second volume containing the Hulk\u0027s early adventures with appearances by the Sub-Mariner, the Mandarin, Ka-Zar and Nick Fury" /*res.Title*/, Url = "http://gateway.marvel.com/v1/public/stories/30" /*res.ResourceURI*/ })./*Where(response.Data.Results.Id*//*.Where(res.Id == 30)*//*.*/ToList()/*.Where(Id == 30)*//*.FirstOrDefault*//*(*//*t => t.Type == "detail").URL }).ToList(*//*)*/;
-        //    //                new ResultViewModel { Id = 30, Description = res.Description, Name = res.Title, Url = "http://gateway.marvel.com/v1/public/stories/30/" })./*Where(response.Data.Results.Id*//*.Where(res.Id == 30)*//*.*/ToList()/*.Where(Id == 30)*//*.FirstOrDefault*//*(*//*t => t.Type == "detail").URL }).ToList(*//*)*/;
-
-        //    results =
-        //            response.Data.Results.Select(res =>
-        //                new ResultViewModel { Id = res.Id, Description = res.Description, Name = res.Title, Url = res.ResourceURI.FirstOrDefault().ToString() }).ToList();
-
-
-
-
-        //    //}.
-
-        //    //results.Where()
-
-        //    //else
-        //    //{
-        //    //    var filter = new ComicRequestFilter { TitleStartsWith = postdata.Name };
-        //    //    filter.OrderBy(OrderResult.NameAscending);
-        //    //    filter.Limit = 40;
-
-        //    //    var response = client.FindComics(filter);
-
-        //    //    if (response.Code == "200")
-        //    //    {
-        //    //        results =
-        //    //        response.Data.Results.Select(res =>
-        //    //            new ResultViewModel { Id = res.Id, Name = res.Title, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
-        //    //    }
-        //    //}
-        //    return Json(results/*.ToList()*/);
-        //    //return View(results);
-        //}
-
-        //return View();
-
-
-
-
-        //[HttpPost]
-        //public JsonResult SomeActionMethod(NameViewModel postdata)
-        //{
-        //    const string apiKey = "1f8c669bfb6d6b86aa65400c8f3ad03d";
-        //    const string privateKey = "b7e37b0815b570c2f84f0267060b0637698ed06a";
-
-
-        //    var client = new MarvelRestClient(apiKey, privateKey);
-        //    List<ResultViewModel> results = null;
-
-        //    if (postdata.Type.ToLower() == "character")
-        //    {
-        //        var filter = new CharacterRequestFilter { NameStartsWith = postdata.Name };
-        //        filter.OrderBy(OrderResult.NameAscending);
-        //        filter.Limit = 40;
-
-        //        var response = client.FindCharacters(filter);
-
-        //        if (response.Code == "200")
-        //        {
-        //            results =
-        //            response.Data.Results.Select(res =>
-        //                new ResultViewModel { Id = res.Id, Name = res.Name, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        var filter = new ComicRequestFilter { TitleStartsWith = postdata.Name };
-        //        filter.OrderBy(OrderResult.NameAscending);
-        //        filter.Limit = 40;
-
-        //        var response = client.FindComics(filter);
-
-        //        if (response.Code == "200")
-        //        {
-        //            results =
-        //            response.Data.Results.Select(res =>
-        //                new ResultViewModel { Id = res.Id, Name = res.Title, Url = res.Urls.FirstOrDefault(t => t.Type == "detail").URL }).ToList();
-        //        }
-        //    }
-        //    return Json(results);
-        //}
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
-}
 
+                [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+                public IActionResult Error()
+                {
+                    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+            }
+        }
+    
