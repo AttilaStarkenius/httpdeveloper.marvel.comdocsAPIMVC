@@ -43,7 +43,8 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             _logger = logger;
         }
 
-        public virtual RestResponse/*RestRequest*//*CharacterResult*/ FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
+        /*public virtual RestResponse*/
+        public async Task /*RestResponse*//*RestRequest*//*CharacterResult*/ /*FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)*/FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
         {
             // Build request url
             //
@@ -60,7 +61,25 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestClient restClient = new RestClient("http://gateway.marvel.com/");
 
-            HttpClient httpClient = new HttpClient("http://gateway.marvel.com/");
+
+
+            // Build request url
+            //
+            string httprequestUrl =
+                string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+
+            //HttpRequest httpRequest = new HttpRequest(httprequestUrl, Method.GET);
+
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, httprequestUrl);
+
+
+            request.RequestFormat = DataFormat.Json;
+
+            HttpClient httpClient = new HttpClient/*("http://gateway.marvel.com/").BaseAddress*/();
+
+            System.Uri uri = new System.Uri("http://gateway.marvel.com/");
+
+            httpClient.BaseAddress = uri;
 
 
             //restClient.Execute(request);
@@ -74,15 +93,21 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
             request.AddHeader("Content-Type", "application/json;charset=UTF-8");
 
 
-            RestResponse response = (RestResponse)restClient.Execute(request);
 
-            response.Headers.Add("Content-Type", "application/json;charset=UTF-8");
+            RestResponse restResponse = (RestResponse)restClient.Execute(request);
+
+            /*(await)*/c httpResponse = await (Microsoft.AspNetCore.Http.HttpResponse)httpClient.GetAsync(httpRequest.ToString());
+
+            //response.Headers.Add("Content-Type", "application/json;charset=UTF-8");
+
+            httpResponse.Headers.Add(new HttpHeader { Name = "Content-Type", Value = "application/json;charset=UTF-8" });
+
 
 
             //_ = response.Content;
 
 
-            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/response/*)*/;
+            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/httpResponse/*)*/;
         }
 
         public IActionResult Index(/*RestResponse restResponse*//*RestRequest request*//*NameViewModel postdata*/)
