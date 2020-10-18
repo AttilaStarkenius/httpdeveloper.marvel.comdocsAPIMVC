@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 {
@@ -44,7 +45,53 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
         }
 
         /*public virtual RestResponse*/
-        public async Task /*RestResponse*//*RestRequest*//*CharacterResult*/ /*FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)*/FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
+
+        public async Task<IActionResult> GetFromExternal((string storyId = "1009351", CharacterRequestFilter filter = null))
+        {
+            
+            using (var response = await HttpClient.GetAsync(https://localhost:5001/api/externalEndpoint))
+            {
+
+            string httprequestUrl =
+                string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+
+            //HttpRequest httpRequest = new HttpRequest(httprequestUrl, Method.GET);
+
+
+
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, httprequestUrl);
+
+
+            //request.RequestFormat = DataFormat.Json;
+
+            HttpClient httpClient = new HttpClient/*("http://gateway.marvel.com/").BaseAddress*/();
+
+            System.Uri uri = new System.Uri("http://gateway.marvel.com/");
+
+            httpClient.BaseAddress = uri;
+
+
+            //restClient.Execute(request);
+
+            //restClient.DefaultParameters
+
+            httpClient.DefaultRequestHeaders
+.Accept
+.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+
+            request.AddHeader("Content-Type", "application/json;charset=UTF-8");
+
+            if (!response.IsSuccessStatusCode)
+                    return StatusCode((int)response.StatusCode);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var deserializedResponse = JsonConvert.DeserializeObject<List<string>>(responseContent);
+
+                return Ok(deserializedResponse);
+            }
+        }
+
+        public async Task<ViewResult> /*RestResponse*//*RestRequest*//*CharacterResult*/ /*FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)*/FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
         {
             // Build request url
             //
@@ -61,7 +108,23 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestClient restClient = new RestClient("http://gateway.marvel.com/");
 
+            //HttpRequest httpRequest = new HttpRequest()
 
+            // GET api/values/getFromExternal
+            //[HttpGet, Route("getFromExternal")]
+            ////public async Task<IActionResult> GetFromExternal()
+            ////{
+            ////    using (var response = await HttpClient.GetAsync("https://localhost:5001/api/externalEndpoint"))
+            ////    {
+            ////        if (!response.IsSuccessStatusCode)
+            ////            return StatusCode((int)response.StatusCode);
+
+            ////        var responseContent = await response.Content.ReadAsStringAsync();
+            ////        var deserializedResponse = JsonConvert.DeserializeObject<List<string>>(responseContent);
+
+            ////        return Ok(deserializedResponse);
+            ////    }
+            ////}
 
             // Build request url
             //
@@ -69,6 +132,8 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
                 string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
 
             //HttpRequest httpRequest = new HttpRequest(httprequestUrl, Method.GET);
+
+            
 
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, httprequestUrl);
 
@@ -96,18 +161,64 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
             RestResponse restResponse = (RestResponse)restClient.Execute(request);
 
-            /*(await)*/c httpResponse = await (Microsoft.AspNetCore.Http.HttpResponse)httpClient.GetAsync(httpRequest.ToString());
+            //[HttpPost]
+            //[Route("AddorUpdatePersonalInfo")]
+            //public async Task<HttpResponseMessage> AddorUpdatePersonalInfo(/*[FromBody] PersonalInfo personalinfo*/)
+            //{
+            //    try
+            //    {
+            //        var result = await this._Personalinforepository.AddorUpdatePersonalInfo(personalinfo);
+            //        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, result);
+            //        return response;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            //    }
+            //}
+
+            /*(await)*//*c */
+            /*Microsoft.AspNetCore.Http.HttpResponse httpResponse*/ /*Task*/
+            //Microsoft.AspNetCore.Http.HttpResponse httpResponse = await (Microsoft.AspNetCore.Http.HttpResponse)httpClient.GetAsync(httpClient.BaseAddress/*uri*//*httpRequestMessage.ToString()*//*httpRequest.ToString()*/);
 
             //response.Headers.Add("Content-Type", "application/json;charset=UTF-8");
 
-            httpResponse.Headers.Add(new HttpHeader { Name = "Content-Type", Value = "application/json;charset=UTF-8" });
+            //    return await Task<HttpResponseMessage>.Factory.StartNew(() =>
+            //{
+            //   return Request.CreateResponse(HttpStatusCode.OK, data);
+            //});
+
+            //var data = 
+
+            //async Task<Microsoft.AspNetCore.Http.HttpResponseMessage> Get()
+            //{
+            //    var data = await httpClient.GetAsync(httpClient.BaseAddress);
+            //    return /*httpRequestMessage.Headers */httpResponse;/*(HttpStatusCode.OK, data);*/
+            //}
+
+            var content = "Content-Type";
+            var response = new HttpResponseMessage
+            {
+                Content = new StringContent(content)
+            };
+            response.Content.Headers.Add(@"Content-Length", content.Length.ToString());
+
+            //httpResponse.Headers.Add(  HttpHeader header = "Content-Type", Value = "application/json;charset=UTF-8" );
+
+            //httpResponse.Headers.Add(Name = "Content-Type", Value = "application/json;charset=UTF-8");
 
 
+            //ViewBag == httpResponse;
+
+
+            ViewBag.Message = httpResponse;
+
+            return View(/*<Task>*//*httpResponse*/);
 
             //_ = response.Content;
 
 
-            return /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*/httpResponse/*)*/;
+            /*return*/ /*Execute*//*<CharacterResult>*//*(*//*(RestRequest)*//*Task*//*)*/;
         }
 
         public IActionResult Index(/*RestResponse restResponse*//*RestRequest request*//*NameViewModel postdata*/)
