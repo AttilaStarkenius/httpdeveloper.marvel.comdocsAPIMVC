@@ -46,49 +46,65 @@ namespace httpdeveloper.marvel.comdocsAPIMVC.Controllers
 
         /*public virtual RestResponse*/
 
-        public async Task<IActionResult> GetFromExternal((string storyId = "1009351", CharacterRequestFilter filter = null))
+        public async Task<IActionResult> GetFromExternal(string storyId = "1009351", CharacterRequestFilter filter = null)
         {
-            
-            using (var response = await HttpClient.GetAsync(https://localhost:5001/api/externalEndpoint))
+
+            HttpClient httpClient = new HttpClient();
+
+            using (var response = await httpClient.GetAsync("https://localhost:5001/api/externalEndpoint"))
             {
 
-            string httprequestUrl =
-                string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
+                string httprequestUrl =
+                    string.Format("{0}/{1}/characters", StoriesUrlSegment, storyId);
 
-            //HttpRequest httpRequest = new HttpRequest(httprequestUrl, Method.GET);
-
-
-
-            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, httprequestUrl);
+                //HttpRequest httpRequest = new HttpRequest(httprequestUrl, Method.GET);
 
 
-            //request.RequestFormat = DataFormat.Json;
 
-            HttpClient httpClient = new HttpClient/*("http://gateway.marvel.com/").BaseAddress*/();
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, httprequestUrl);
 
-            System.Uri uri = new System.Uri("http://gateway.marvel.com/");
 
-            httpClient.BaseAddress = uri;
+                //request.RequestFormat = DataFormat.Json;
 
+                HttpClient httpClient = new HttpClient/*("http://gateway.marvel.com/").BaseAddress*/();
+
+                System.Uri uri = new System.Uri("http://gateway.marvel.com/");
+
+                httpClient.BaseAddress = uri;
+
+                var content = await response.Content.ReadAsAsync<IActionResult>();
+
+                return Ok(content);
+
+
+            }
 
             //restClient.Execute(request);
 
             //restClient.DefaultParameters
 
-            httpClient.DefaultRequestHeaders
-.Accept
-.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
 
-            request.AddHeader("Content-Type", "application/json;charset=UTF-8");
 
-            if (!response.IsSuccessStatusCode)
-                    return StatusCode((int)response.StatusCode);
 
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var deserializedResponse = JsonConvert.DeserializeObject<List<string>>(responseContent);
 
-                return Ok(deserializedResponse);
-            }
+
+
+            //            httpClient.DefaultRequestHeaders
+            //.Accept
+            //.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+
+            //            request.AddHeader("Content-Type", "application/json;charset=UTF-8");
+
+            //            if (!response.IsSuccessStatusCode)
+            //                    return StatusCode((int)response.StatusCode);
+
+            //                var responseContent = await response.Content.ReadAsStringAsync();
+            //                var deserializedResponse = JsonConvert.DeserializeObject<List<string>>(responseContent);
+
+            //                return Ok(deserializedResponse);
+            //            }
+            //        }
+
         }
 
         public async Task<ViewResult> /*RestResponse*//*RestRequest*//*CharacterResult*/ /*FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)*/FindStoryCharacters(string storyId = "1009351", CharacterRequestFilter filter = null)
